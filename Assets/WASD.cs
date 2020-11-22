@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WASD : MonoBehaviour
 {
-    public float speed = 10f;
+    public Vector2 speed = new Vector2(5f, 10f);
     private Rigidbody rb;
 
     void OnEnable()
@@ -16,9 +16,12 @@ public class WASD : MonoBehaviour
     void Update()
     {
         var to = new Vector3();
-        to.x = Input.GetAxis("Horizontal");
-        to.z = Input.GetAxis("Vertical");
+        to.x = Input.GetAxis("Horizontal") * speed.x;
+        to.z = Input.GetAxis("Vertical") * speed.y;
 
-        rb.MovePosition(transform.position + to * speed * Time.deltaTime);
+        if (to.magnitude < .1f)
+            return;
+
+        rb.position += to * Time.deltaTime;
     }
 }
