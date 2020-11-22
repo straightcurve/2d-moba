@@ -2,26 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WASD : MonoBehaviour
+public class WASD : Moveable
 {
     public Vector2 speed = new Vector2(5f, 10f);
-    private Rigidbody rb;
+    private SpriteRenderer spriteRenderer;
 
-    void OnEnable()
-    {
-        rb = GetComponent<Rigidbody>();
+    protected override void OnEnable() {
+        base.OnEnable();
+
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void ComputeVelocity()
     {
-        var to = new Vector3();
-        to.x = Input.GetAxis("Horizontal") * speed.x;
-        to.z = Input.GetAxis("Vertical") * speed.y;
+        var move = Vector3.zero;
 
-        if (to.magnitude < .1f)
-            return;
+        move.x = Input.GetAxis("Horizontal") * speed.x;
+        move.z = Input.GetAxis("Vertical") * speed.y;
 
-        rb.position += to * Time.deltaTime;
+        // if (Input.GetButtonDown("Jump") && grounded) {
+        //     velocity.y = jumpTakeOffSpeed;
+        // } else if (Input.GetButtonUp("Jump")) {
+        //     if (velocity.y > 0)
+        //         velocity.y *= .5f;
+        // }
+
+        var shouldFlip = (spriteRenderer.flipX ? (move.x > .01f) : (move.x < .01f));
+        if (shouldFlip)
+            spriteRenderer.flipX = !spriteRenderer.flipX;
+
+        // animator.SetFloat("speed", Mathf.Abs(velocity.x) / maxWalkSpeed);
+
+        targetVelocity = move;
     }
 }
