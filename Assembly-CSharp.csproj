@@ -36,14 +36,18 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\WASD.cs" />
      <Compile Include="Assets\Moveable.cs" />
      <Compile Include="Assets\IBulletSpawner.cs" />
-     <Compile Include="Assets\IMoveable.cs" />
+     <Compile Include="Assets\WASD.cs" />
      <Compile Include="Assets\IBullet.cs" />
      <Compile Include="Assets\ForwardBulletSpawner.cs" />
+     <Compile Include="Assets\IMoveable.cs" />
      <Compile Include="Assets\PlayerController.cs" />
      <Compile Include="Assets\ForwardBullet.cs" />
+     <Compile Include="Assets\Damageable.cs" />
+     <Compile Include="Assets\TowerController.cs" />
+     <Compile Include="Assets\HomingBullet.cs" />
+     <Compile Include="Assets\TowerBullet.cs" />
     <Reference Include="UnityEngine">
         <HintPath>/home/tony/Unity/Hub/Editor/2020.1.8f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
